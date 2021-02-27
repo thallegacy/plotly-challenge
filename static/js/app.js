@@ -75,6 +75,7 @@ function init() {
           x: top10sv,
           y: top10oid,
           text: top10ol,
+          automargin: true,
           type: "bar",
           orientation: "h",
         }
@@ -114,6 +115,7 @@ function init() {
            y: sample_values,
            text: otu_labels,
            mode: "markers",
+           automargin: true,
            marker: {
             size: sample_values,
             color: otu_ids
