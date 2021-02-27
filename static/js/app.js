@@ -118,7 +118,8 @@ function init() {
            automargin: true,
            marker: {
             size: sample_values,
-            color: otu_ids
+            color: otu_ids,
+            colorscale: 'Earth'
           }
         }
       ];
