@@ -9,7 +9,7 @@ function init() {
       var sampleNames = data.names;
     
       //Console check
-      console.log(sampleNames)
+      console.log(sampleNames);
 
       //Loop through the names
       sampleNames.forEach((value) => {
@@ -43,16 +43,26 @@ function init() {
       var filteredData = samples.filter(sample => sample.id == sampleData)[0];
       
       //console check
-      console.log(filteredData)
+    //   console.log(filteredData)
 
       var otu_ids = filteredData.otu_ids;
       var otu_labels = filteredData.otu_labels;
       var sample_values = filteredData.sample_values;
 
       //console check
-      console.log(otu_ids)
-      console.log(otu_labels)
-      console.log(sample_values)
+    //   console.log(otu_ids);
+    //   console.log(otu_labels);
+    //   console.log(sample_values);
+    
+      // get 10 ten by slicing and sorting
+      // sort in reverse for Hbar descending
+      var top10sv = sample_values.slice(0, 10).reverse();
+      var top10ol = otu_labels.slice(0, 10).reverse();
+      var top10oid = otu_ids.slice(0, 10).reverse();
 
+      //console check
+      console.log(top10sv);
+      console.log(top10ol);
+      console.log(top10oid);
     });
   }
