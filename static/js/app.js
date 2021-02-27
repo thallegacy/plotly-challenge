@@ -45,5 +45,14 @@ function init() {
       //console check
       console.log(filteredData)
 
+      var otu_ids = filteredData.otu_ids;
+      var otu_labels = filteredData.otu_labels;
+      var sample_values = filteredData.sample_values;
+
+      //console check
+      console.log(otu_ids)
+      console.log(otu_labels)
+      console.log(sample_values)
+
     });
   }
