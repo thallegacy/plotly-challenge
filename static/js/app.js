@@ -16,7 +16,7 @@ function init() {
           // Append a cell to the row for each value using "td" tag
           option = selectoption.append("option")
           // Append the text from each value to the option
-          option.text(value).property("value", value);
+          option.text(value).property("value");
        
       });
       
@@ -27,6 +27,7 @@ function init() {
 
       //Run function
       hbarChart(firstName);
+      bubbleChart(firstName);
 
     });
   }
@@ -62,10 +63,11 @@ function init() {
       var top10oid = otu_ids.slice(0, 10).map(otu_id => `OTU ${otu_id}`).reverse();
 
       //console check
-      console.log(top10sv);
-      console.log(top10ol);
-      console.log(top10oid);
-
+    //   console.log(top10sv);
+    //   console.log(top10ol);
+    //   console.log(top10oid);
+        
+      // Build Plotly HBar
       var hbarData = [
         {
           x: top10sv,
@@ -77,5 +79,46 @@ function init() {
       ];
 
       Plotly.newPlot("bar", hbarData);
+
+    });
+  }
+
+  //Function to build bubble bar chart
+  function bubbleChart(sampleData) {
+    // Use the list of sample names to populate the select options
+    d3.json("samples.json").then((data) => {
+
+      //Grab the samples to use from the samples in the json
+      var samples = data.samples;
+      //Filter the data based on the ID/name given from samples
+      var filteredData = samples.filter(sample => sample.id == sampleData)[0];
+      
+      //console check
+    //   console.log(filteredData)
+
+      var otu_ids = filteredData.otu_ids;
+      var otu_labels = filteredData.otu_labels;
+      var sample_values = filteredData.sample_values;
+
+      //console check
+    //   console.log(otu_ids);
+    //   console.log(otu_labels);
+    //   console.log(sample_values);
+
+    // Build Plotly Bubble Chart
+    var bubbleData = [
+        {
+           x: otu_ids,
+           y: sample_values,
+           text: otu_labels,
+           mode: "markers",
+           marker: {
+            size: sample_values,
+            color: otu_ids
+          }
+        }
+      ];
+
+      Plotly.newPlot("bubble", bubbleData);
     });
   }
