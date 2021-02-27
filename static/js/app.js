@@ -150,3 +150,11 @@ function init() {
   
     });
   }
+
+  function optionChanged(sampleData) {
+    
+      //Run functions based on the changed value in the select option
+      hbarChart(sampleData);
+      bubbleChart(sampleData);
+      demoInfo(sampleData);
+  }
