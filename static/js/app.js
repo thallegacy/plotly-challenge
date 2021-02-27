@@ -1,3 +1,4 @@
+//Function to launch the inital charts
 function init() {
     // Grab a reference to the dropdown select element
     var selectoption = d3.select("#selDataset");
@@ -5,7 +6,7 @@ function init() {
     // Use the list of sample names to populate the select options
     d3.json("samples.json").then((data) => {
       
-      //Grab the names to use from the names in the json
+      //Grab the data to use from the names in the json
       var sampleNames = data.names;
     
       //Console check
@@ -28,6 +29,7 @@ function init() {
       //Run function
       hbarChart(firstName);
       bubbleChart(firstName);
+      demoInfo(firstName);
 
     });
   }
@@ -38,7 +40,7 @@ function init() {
     // Use the list of sample names to populate the select options
     d3.json("samples.json").then((data) => {
 
-      //Grab the samples to use from the samples in the json
+      //Grab the data to use from the samples in the json
       var samples = data.samples;
       //Filter the data based on the ID/name given from samples
       var filteredData = samples.filter(sample => sample.id == sampleData)[0];
@@ -88,7 +90,7 @@ function init() {
     // Use the list of sample names to populate the select options
     d3.json("samples.json").then((data) => {
 
-      //Grab the samples to use from the samples in the json
+      //Grab the data to use from the samples in the json
       var samples = data.samples;
       //Filter the data based on the ID/name given from samples
       var filteredData = samples.filter(sample => sample.id == sampleData)[0];
@@ -120,5 +122,31 @@ function init() {
       ];
 
       Plotly.newPlot("bubble", bubbleData);
+    });
+  }
+
+  function demoInfo(sampleData) {
+    d3.json("samples.json").then((data) => {
+
+      //Grab the data to use from the metadata in the json
+      var metadata = data.metadata;
+      
+      //Filter the data based on the ID/name given from samples
+      var filteredData = metadata.filter(sample => sample.id == sampleData)[0];
+
+      //console check
+      console.log(filteredData)
+      
+      // Grab a reference to the dropdown select element
+      var demoPanel = d3.select("#sample-metadata");
+  
+      // clear any existing metadata
+      demoPanel.html("");
+  
+      // Add each key and value pair to the panel
+      Object.entries(filteredData).forEach(([key, value]) => {
+        demoPanel.append("h5").text(`${key}: ${value}`);
+      });
+  
     });
   }
