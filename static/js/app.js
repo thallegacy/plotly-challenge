@@ -58,11 +58,24 @@ function init() {
       // sort in reverse for Hbar descending
       var top10sv = sample_values.slice(0, 10).reverse();
       var top10ol = otu_labels.slice(0, 10).reverse();
-      var top10oid = otu_ids.slice(0, 10).reverse();
+      // Add OTU label to each ID  
+      var top10oid = otu_ids.slice(0, 10).map(otu_id => `OTU ${otu_id}`).reverse();
 
       //console check
       console.log(top10sv);
       console.log(top10ol);
       console.log(top10oid);
+
+      var hbarData = [
+        {
+          x: top10sv,
+          y: top10oid,
+          text: top10ol,
+          type: "bar",
+          orientation: "h",
+        }
+      ];
+
+      Plotly.newPlot("bar", hbarData);
     });
   }
