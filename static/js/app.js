@@ -161,6 +161,7 @@ function init() {
       hbarChart(sampleData);
       bubbleChart(sampleData);
       demoInfo(sampleData);
+      gaugeChart(sampleData);
   }
 
   function gaugeChart(sampleData) {
@@ -174,7 +175,7 @@ function init() {
   
       var data = [
         {
-          domain: { x: [0, 9], y: [0, 9] },
+          domain: { x: [0, 1], y: [0, 1] },
           value: filteredData.wfreq,
           title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week" },
           type: "indicator",
