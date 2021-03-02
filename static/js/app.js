@@ -177,7 +177,7 @@ function init() {
         {
           domain: { x: [0, 1], y: [0, 1] },
           value: filteredData.wfreq,
-          title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week" },
+          automargin: true,
           type: "indicator",
           mode: "gauge+number"
         }
