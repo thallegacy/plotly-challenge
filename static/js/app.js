@@ -30,6 +30,7 @@ function init() {
       hbarChart(firstName);
       bubbleChart(firstName);
       demoInfo(firstName);
+      gaugeChart(firstName);
 
     });
   }
@@ -160,4 +161,29 @@ function init() {
       hbarChart(sampleData);
       bubbleChart(sampleData);
       demoInfo(sampleData);
+  }
+
+  function gaugeChart(sampleData) {
+    d3.json("samples.json").then((data) => {
+
+      //Grab the data to use from the metadata in the json
+      var metadata = data.metadata;
+      
+      //Filter the data based on the ID/name given from samples
+      var filteredData = metadata.filter(sample => sample.id == sampleData)[0];
+  
+      var data = [
+        {
+          domain: { x: [0, 9], y: [0, 9] },
+          value: filteredData.wfreq,
+          title: { text: "<b>Belly Button Washing Frequency</b> <br> Scrubs per Week" },
+          type: "indicator",
+          mode: "gauge+number"
+        }
+      ];
+      
+      var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+      Plotly.newPlot('gauge', data, layout);
+  
+    });
   }
