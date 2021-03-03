@@ -27,8 +27,7 @@ function init() {
       console.log(firstName)
 
       //Run function
-      hbarChart(firstName);
-      bubbleChart(firstName);
+      allCharts(firstName);
       demoInfo(firstName);
 
     });
@@ -36,7 +35,7 @@ function init() {
   init();
 
   //Function to build horizontal bar chart
-  function hbarChart(sampleData) {
+  function allCharts(sampleData) {
     // Use the list of sample names to populate the select options
     d3.json("samples.json").then((data) => {
 
@@ -83,33 +82,7 @@ function init() {
 
       Plotly.newPlot("bar", hbarData);
 
-    });
-  }
-
-  //Function to build bubble bar chart
-  function bubbleChart(sampleData) {
-    // Use the list of sample names to populate the select options
-    d3.json("samples.json").then((data) => {
-
-      //Grab the data to use from the samples in the json
-      var samples = data.samples;
-      //Filter the data based on the ID/name given from samples
-      var filteredData = samples.filter(sample => sample.id == sampleData)[0];
-      
-      //console check
-    //   console.log(filteredData)
-
-      var otu_ids = filteredData.otu_ids;
-      var otu_labels = filteredData.otu_labels;
-      var sample_values = filteredData.sample_values;
-
-      //console check
-    //   console.log(otu_ids);
-    //   console.log(otu_labels);
-    //   console.log(sample_values);
-
-    // Build Plotly Bubble Chart
-    var bubbleData = [
+      var bubbleData = [
         {
            x: otu_ids,
            y: sample_values,
@@ -125,8 +98,11 @@ function init() {
       ];
 
       Plotly.newPlot("bubble", bubbleData);
+
     });
   }
+
+ 
 
   function demoInfo(sampleData) {
     d3.json("samples.json").then((data) => {
@@ -157,8 +133,7 @@ function init() {
   function optionChanged(sampleData) {
     
       //Run functions based on the changed value in the select option
-      hbarChart(sampleData);
-      bubbleChart(sampleData);
+      allCharts(sampleData);
       demoInfo(sampleData);
     
   }
